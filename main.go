@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/dslipak/pdf"
+	"github.com/go-pdf/fpdf"
 )
 
 func main() {
@@ -12,6 +13,21 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(content)
+	fmt.Println("sasd")
+
+	generatePdf()
+}
+
+func generatePdf() {
+	pdf := fpdf.New("P", "mm", "A4", "")
+	pdf.AddPage()
+	pdf.SetFont("Arial", "B", 16)
+	pdf.Cell(40, 10, "Hello, world\n")
+	pdf.SetLineWidth(2)
+	pdf.Ln(-1)
+	pdf.Cell(40, 10, "another line")
+	pdf.OutputFileAndClose("hello.pdf")
+
 }
 
 func readPdf2(path string) (string, error) {
